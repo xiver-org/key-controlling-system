@@ -14,13 +14,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
         android:shadowColor="@color/text"
-        android:text="@string/email"
+        android:text="@string/registration_page_name"
         android:textColor="@color/text"
         android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/login" />
+        tools:text="@string/registration_page_name" />
 
     <EditText
         android:id="@+id/editTextTextEmailAddress"
@@ -75,8 +75,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="164dp"
-        android:onClick="loginBtnTriggerr"
-        android:text="@string/login_btn_text"
+        android:onClick="registrationBtnTriggerr"
+        android:text="@string/registration_btn_text"
         android:textColorLink="#7F5151"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,8 +88,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:onClick="registrationTextTriggerr"
-        android:text="@string/registration_text"
+        android:onClick="loginTextTriggerr"
+        android:text="@string/login_text"
         android:textColor="@color/text_secondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

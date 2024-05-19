@@ -4,4 +4,8 @@
     <string name="email">Почта</string>
     <string name="password">Почта</string>
     <string name="login_btn_text">Войти</string>
+    <string name="registration_btn_text">Зарегистрироваться</string>
+    <string name="registration_text">Нет аккаунта? Зарегистрироваться.</string>
+    <string name="login_text">Есть аккаунт? Войти.</string>
+    <string name="registration_page_name">Регистрация</string>
 </resources>
