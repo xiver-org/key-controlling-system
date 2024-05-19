@@ -48,8 +48,8 @@ public class GiveKey extends AppCompatActivity {
             return insets;
         });
 
-        spinner2 = (Spinner) findViewById(R.id.spinner);
-        spinner1 = (Spinner) findViewById(R.id.spinner2);
+        spinner1 = (Spinner) findViewById(R.id.spinner);
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
 
         pref = getSharedPreferences("Test2", MODE_PRIVATE);
 
@@ -112,12 +112,12 @@ public class GiveKey extends AppCompatActivity {
         String jsonString = pref.getString(save_key3, "[]");
         JSONArray keysHistory = new JSONArray(jsonString);
         LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
-        keysHistory.put(fio + "|" + cabinet + "|" + currentDate.toString() + " " + currentTime.toString() + "|" + " ");
+        String[] currentTime = LocalTime.now().toString().split("\\.");
+        keysHistory.put(fio + "|" + cabinet + "|" + currentDate.toString() + " " + currentTime[0].toString() + "|" + " ");
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor edit = pref.edit();
         edit.putString(save_key3, keysHistory.toString());
         edit.apply();
-        Toast.makeText(this, "Готово!", Toast.LENGTH_LONG)
+        Toast.makeText(this, "Готово!", Toast.LENGTH_SHORT)
                 .show();
 
         Intent intent = new Intent(this, MainActivity.class);

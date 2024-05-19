@@ -64,10 +64,10 @@ public class CreatePeuple extends AppCompatActivity {
             jsonArray.put(input);
             edit.putString(save_key, jsonArray.toString());
             edit.apply();
-            Toast.makeText(this, "Готово!", Toast.LENGTH_LONG)
+            Toast.makeText(this, "Готово!", Toast.LENGTH_SHORT)
                     .show();
         } else {
-            Toast.makeText(this, "Этот пользователь уже существует!", Toast.LENGTH_LONG)
+            Toast.makeText(this, "Этот пользователь уже существует!", Toast.LENGTH_SHORT)
                     .show();
         }
 
