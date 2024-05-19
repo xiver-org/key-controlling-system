@@ -1,8 +1,12 @@
 package com.xiver.keycontrollingsystem;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,19 +14,17 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.xiver.keycontrollingsystem.network.Network;
-
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
+    private SharedPreferences pref;
+    private TextView asd;
+    private final String save_key = "cabinets";
+    private final String save_key3 = "keys_history";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Network network = new Network();
-
-        if(network.isLogged()) {
-            Intent intent = new Intent(this, MainPage.class);
-            startActivity(intent);
-        }
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
@@ -33,16 +35,35 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        init();
 
+
+        String users = pref.getString(save_key3, "[]");
+
+        asd.setText(users);
     }
 
-    public void loginBtnTriggerr(View v) {
-        Intent intent = new Intent(this, MainPage.class);
+    private void init() {
+        pref = getSharedPreferences("Test2", MODE_PRIVATE);
+        asd = findViewById(R.id.textView2);
+    }
+
+    public void addPeupleBtnOnClick(View v) {
+        Intent intent = new Intent(this, CreatePeuple.class);
         startActivity(intent);
     }
 
-    public void registrationTextTriggerr(View v) {
-        Intent intent = new Intent(this, RegistrationPage.class);
+    public void givKeyBtnOnClick(View v) {
+        Intent intent = new Intent(this, GiveKey.class);
+        startActivity(intent);
+    }
+
+    public void returnKeyBtnOnClick(View v) {
+        Intent intent = new Intent(this, ReturnKey.class);
+        startActivity(intent);
+    }
+    public void createCabinetKeyBtnOnClick(View v) {
+        Intent intent = new Intent(this, CreateCabinet.class);
         startActivity(intent);
     }
 }
