@@ -1,4 +1,4 @@
-package com.example.key_controlling_system;
+package com.xiver.keycontrollingsystem;
 
 import org.junit.Test;
 

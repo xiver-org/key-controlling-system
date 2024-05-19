@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "key-controlling-system"
+rootProject.name = "Key controlling system"
 include(":app")
