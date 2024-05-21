@@ -64,7 +64,7 @@ public class ReturnKey extends AppCompatActivity {
         for (int i = 0; i < jsonKeysHistory.length(); i++) {
             try {
                 String[] parts = jsonKeysHistory.getString(i).split("\\|");
-                if (parts[3].equals(" ")) {
+                if (parts[3].equals(" ") && !list2.contains(parts[1])) {
                     list2.add(parts[1]);
                 }
             } catch (JSONException e) {
