@@ -36,7 +36,7 @@ public class CreatePeople extends AppCompatActivity {
     }
 
     private void init() {
-        pref = getSharedPreferences("Test4", MODE_PRIVATE);
+        pref = getSharedPreferences("Test5", MODE_PRIVATE);
 
         fio = findViewById(R.id.editTextText);
     }
@@ -45,9 +45,17 @@ public class CreatePeople extends AppCompatActivity {
     public void onPeopleCreate(View v) throws JSONException {
         String input = fio.getText().toString();
 
-        if (input.length() > 30){
-            Toast.makeText(this, "ФИО не должно превышать 30 символов", Toast.LENGTH_SHORT)
+        if (input.length() > 20){
+            Toast.makeText(this, "Фамилия не должна превышать 20 символов", Toast.LENGTH_SHORT)
                     .show();
+            return;
+        }
+
+        if (input.isEmpty()){
+            Toast.makeText(this, "Поле не должно быть пустым!", Toast.LENGTH_SHORT)
+                    .show();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
             return;
         }
 

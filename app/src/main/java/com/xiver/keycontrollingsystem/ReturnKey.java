@@ -45,7 +45,7 @@ public class ReturnKey extends AppCompatActivity {
             return insets;
         });
 
-        pref = getSharedPreferences("Test4", MODE_PRIVATE);
+        pref = getSharedPreferences("Test5", MODE_PRIVATE);
 
         String keysHistory = pref.getString(save_key3, "[]");
 
@@ -94,7 +94,7 @@ public class ReturnKey extends AppCompatActivity {
                 String[] parts = keysHistory.getString(i).split("\\|");
 
                 if (parts[1].equals(cabinet)){
-                    parts[3] = currentDate.toString() + " " + currentTime[0];
+                    parts[3] = currentDate.toString() + " " + currentTime[0] + ":" + currentTime[1];
                 }
 
                 StringBuilder rs = new StringBuilder();

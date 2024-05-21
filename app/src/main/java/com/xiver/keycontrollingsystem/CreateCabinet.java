@@ -37,7 +37,7 @@ public class CreateCabinet extends AppCompatActivity {
     }
 
     private void init() {
-        pref = getSharedPreferences("Test4", MODE_PRIVATE);
+        pref = getSharedPreferences("Test5", MODE_PRIVATE);
 
         cabinetNum = findViewById(R.id.editTextNumber);
     }
@@ -52,6 +52,14 @@ public class CreateCabinet extends AppCompatActivity {
         if (input.length() > 5){
             Toast.makeText(this, "Длинна кабинета не должна превышать 5 символов", Toast.LENGTH_SHORT)
                     .show();
+            return;
+        }
+
+        if (input.isEmpty()){
+            Toast.makeText(this, "Поле не должно быть пустым!", Toast.LENGTH_SHORT)
+                    .show();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
             return;
         }
 

@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 TableRow.LayoutParams.MATCH_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT));
 
-        String[] fst_parts = "Имя.кабинет.Время выдачи.Время возврата".split("\\.");
+        String[] fst_parts = "Фамилия.кабинет.Время выдачи.Время возврата".split("\\.");
         for (int j = 0; j < 4; j++) {
             TextView a = new TextView(this);
             a.setTextSize(20);
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        pref = getSharedPreferences("Test4", MODE_PRIVATE);
+        pref = getSharedPreferences("Test5", MODE_PRIVATE);
     }
 
 //    @Override

@@ -4,7 +4,7 @@
     <string name="give_key">Выдать ключ</string>
     <string name="put_key">Вернуть ключ</string>
     <string name="fio">Введите фамилию, имя и отчество</string>
-    <string name="fio_placeholder">ФИО</string>
+    <string name="fio_placeholder">Фамиля</string>
     <string name="add">Добавить</string>
     <string name="cabinet">Кабинет</string>
     <string name="whom">Кому</string>
@@ -12,4 +12,5 @@
     <string name="create_cabinet">Добавить кабинет</string>
     <string name="return_key_btn_text">Вернуть ключ</string>
     <string name="return_key_text">Выберите ключ для возврата</string>
+    <string name="export_to_csv">Экспортировать в CSV</string>
 </resources>

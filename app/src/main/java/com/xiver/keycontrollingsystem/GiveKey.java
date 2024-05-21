@@ -52,7 +52,7 @@ public class GiveKey extends AppCompatActivity {
         spinner1 = (Spinner) findViewById(R.id.spinner);
         spinner2 = (Spinner) findViewById(R.id.spinner2);
 
-        pref = getSharedPreferences("Test4", MODE_PRIVATE);
+        pref = getSharedPreferences("Test5", MODE_PRIVATE);
 
         String users = pref.getString(save_key2, "[]");
         JSONArray jsonUsers;
