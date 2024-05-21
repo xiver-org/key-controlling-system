@@ -36,7 +36,7 @@ public class CreatePeople extends AppCompatActivity {
     }
 
     private void init() {
-        pref = getSharedPreferences("Test5", MODE_PRIVATE);
+        pref = getSharedPreferences("Storage123234345", MODE_PRIVATE);
 
         fio = findViewById(R.id.editTextText);
     }

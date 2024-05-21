@@ -1,17 +1,36 @@
 package com.xiver.keycontrollingsystem;
 
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.Settings;
+import android.speech.AlternativeSpan;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -19,10 +38,17 @@ import androidx.core.view.WindowInsetsCompat;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
     private SharedPreferences pref;
     private final String save_key = "cabinets";
     private final String save_key3 = "keys_history";
+    private ActivityResultLauncher<Intent> activityResultLauncher;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -40,6 +66,20 @@ public class MainActivity extends AppCompatActivity {
 
         init();
 
+        activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult o) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    if (Environment.isExternalStorageManager())
+                        Toast.makeText(MainActivity.this, "We have permission", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(MainActivity.this, "You denied the perm", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "You denied the perm", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         TableLayout table_layout = findViewById(R.id.table_layout);
 
         String keysHistory = pref.getString(save_key3, "[]");
@@ -56,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 TableRow.LayoutParams.MATCH_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT));
 
-        String[] fst_parts = "Фамилия.кабинет.Время выдачи.Время возврата".split("\\.");
+        String[] fst_parts = "Фамилия.Кабинет.Время выдачи.Время возврата".split("\\.");
         for (int j = 0; j < 4; j++) {
             TextView a = new TextView(this);
             a.setTextSize(20);
@@ -89,41 +129,54 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        pref = getSharedPreferences("Test5", MODE_PRIVATE);
+        pref = getSharedPreferences("Storage123234345", MODE_PRIVATE);
     }
+    public void exportCsvData(View v) throws FileNotFoundException {
+        if (!this.checkPermissions()) {
+            requestPermissions();
+            if (!this.checkPermissions()){
+                return;
+            }
+        }
 
-//    @Override
-//    protected void onRestart() {
-//        super.onRestart();
-//
-//        LinearLayout linear_layout = findViewById(R.id.linear_layout);
-//
-//        String keysHistory = pref.getString(save_key3, "[]");
-//
-//        JSONArray jsonKeysHistory;
-//        try {
-//            jsonKeysHistory = new JSONArray(keysHistory);
-//        } catch (JSONException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        for (int i = 0; i < jsonKeysHistory.length(); i++) {
-//            try {
-//                String[] parts = jsonKeysHistory.getString(i).split("\\|");
-//
-//                LinearLayout row = new LinearLayout(this);
-//                row.setBaselineAligned(true);
-//                for (int j = 0; j < 4; j++) {
-//                    TextView a = new TextView(this);
-//                    a.setText(parts[j]);
-//                    row.addView(a);
-//                }
-//                linear_layout.addView(row);
-//            } catch (JSONException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
-//    }
+        String keysHistory = pref.getString(save_key3, "[]");
+
+        StringBuilder res = new StringBuilder();
+
+        res.append("Фамилия;Кабинет;Время выдачи;Время возврата");
+
+        JSONArray jsonKeysHistory;
+        try {
+            jsonKeysHistory = new JSONArray(keysHistory);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+        for (int i = jsonKeysHistory.length() - 1; i >= 0; i--) {
+            try {
+                String[] parts = jsonKeysHistory.getString(i).split("\\|");
+
+                res.append("\n" + parts[0] + ";" + parts[1] + ";" + parts[2] + ";" + parts[3]);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        String baseDir = Environment.getExternalStorageDirectory().getAbsolutePath();
+        String fileName = "KeyHistory.csv";
+        String filePath = baseDir + File.separator + fileName;
+        File f = new File(filePath);
+        try {
+            FileOutputStream writer = new FileOutputStream(f);
+            writer.write(res.toString().getBytes());
+            writer.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Toast.makeText(this, "Готово! Файл находится по пути: " + filePath, Toast.LENGTH_SHORT)
+                .show();
+    }
 
     public void addPeupleBtnOnClick(View v) {
         Intent intent = new Intent(this, CreatePeople.class);
@@ -142,5 +195,45 @@ public class MainActivity extends AppCompatActivity {
     public void createCabinetKeyBtnOnClick(View v) {
         Intent intent = new Intent(this, CreateCabinet.class);
         startActivity(intent);
+    }
+
+
+
+
+    private boolean checkPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            return Environment.isExternalStorageManager();
+        } else {
+            int readCheck = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
+            int writeCheck = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
+            return readCheck == PackageManager.PERMISSION_GRANTED && writeCheck == PackageManager.PERMISSION_GRANTED;
+        }
+    }
+
+    private void requestPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Разрешение")
+                    .setMessage("Пожалуйста, дайте разрешение на запись в хранилище")
+                    .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            try {
+                                Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                                intent.addCategory("android.intent.category.DEFAULT");
+                                intent.setData(Uri.parse(String.format("package:$s", new Object[]{getApplicationContext().getPackageName()})));
+                                activityResultLauncher.launch(intent);
+                            } catch (Exception e) {
+                                Intent intent = new Intent();
+                                intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                                activityResultLauncher.launch(intent);
+                            }
+                        }
+                    })
+                    .setCancelable(false)
+                    .show();
+        } else {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE}, 30);
+        }
     }
 }
