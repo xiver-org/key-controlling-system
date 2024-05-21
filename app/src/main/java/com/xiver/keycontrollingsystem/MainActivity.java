@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 TableRow.LayoutParams.MATCH_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT));
 
-        String[] fst_parts = "Фамилия.Кабинет.Время выдачи.Время возврата".split("\\.");
+        String[] fst_parts = "ФИО.Кабинет.Время выдачи.Время возврата".split("\\.");
         for (int j = 0; j < 4; j++) {
             TextView a = new TextView(this);
             a.setTextSize(20);
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
         StringBuilder res = new StringBuilder();
 
-        res.append("Фамилия;Кабинет;Время выдачи;Время возврата");
+        res.append("ФИО;Кабинет;Время выдачи;Время возврата");
 
         JSONArray jsonKeysHistory;
         try {

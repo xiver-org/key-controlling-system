@@ -4,7 +4,7 @@
     <string name="give_key">Выдать ключ</string>
     <string name="put_key">Вернуть ключ</string>
     <string name="fio">Введите фамилию, имя и отчество</string>
-    <string name="fio_placeholder">Фамиля</string>
+    <string name="fio_placeholder">ФИО</string>
     <string name="add">Добавить</string>
     <string name="cabinet">Кабинет</string>
     <string name="whom">Кому</string>
