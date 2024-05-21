@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,9 +16,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-public class CreatePeuple extends AppCompatActivity {
+public class CreatePeople extends AppCompatActivity {
     private SharedPreferences pref;
     private final String save_key = "users";
     private EditText fio;
@@ -38,7 +36,7 @@ public class CreatePeuple extends AppCompatActivity {
     }
 
     private void init() {
-        pref = getSharedPreferences("Test2", MODE_PRIVATE);
+        pref = getSharedPreferences("Test4", MODE_PRIVATE);
 
         fio = findViewById(R.id.editTextText);
     }
@@ -46,6 +44,12 @@ public class CreatePeuple extends AppCompatActivity {
 
     public void onPeopleCreate(View v) throws JSONException {
         String input = fio.getText().toString();
+
+        if (input.length() > 30){
+            Toast.makeText(this, "ФИО не должно превышать 30 символов", Toast.LENGTH_SHORT)
+                    .show();
+            return;
+        }
 
         String users = pref.getString(save_key, "[]");
 

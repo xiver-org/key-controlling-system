@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class GiveKey extends AppCompatActivity {
@@ -51,7 +52,7 @@ public class GiveKey extends AppCompatActivity {
         spinner1 = (Spinner) findViewById(R.id.spinner);
         spinner2 = (Spinner) findViewById(R.id.spinner2);
 
-        pref = getSharedPreferences("Test2", MODE_PRIVATE);
+        pref = getSharedPreferences("Test4", MODE_PRIVATE);
 
         String users = pref.getString(save_key2, "[]");
         JSONArray jsonUsers;
@@ -113,7 +114,8 @@ public class GiveKey extends AppCompatActivity {
         JSONArray keysHistory = new JSONArray(jsonString);
         LocalDate currentDate = LocalDate.now();
         String[] currentTime = LocalTime.now().toString().split("\\.");
-        keysHistory.put(fio + "|" + cabinet + "|" + currentDate.toString() + " " + currentTime[0].toString() + "|" + " ");
+        currentTime = Arrays.copyOfRange(currentTime[0].split(":"), 0, 2);
+        keysHistory.put(fio + "|" + cabinet + "|" + currentDate.toString() + " " + currentTime[0] + ":" + currentTime[1] + "|" + " ");
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor edit = pref.edit();
         edit.putString(save_key3, keysHistory.toString());
         edit.apply();

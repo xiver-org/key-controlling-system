@@ -10,4 +10,6 @@
     <string name="whom">Кому</string>
     <string name="give">Выдать</string>
     <string name="create_cabinet">Добавить кабинет</string>
+    <string name="return_key_btn_text">Вернуть ключ</string>
+    <string name="return_key_text">Выберите ключ для возврата</string>
 </resources>

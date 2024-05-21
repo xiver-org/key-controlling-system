@@ -22,7 +22,7 @@
             android:name=".GiveKey"
             android:exported="false" />
         <activity
-            android:name=".CreatePeuple"
+            android:name=".CreatePeople"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

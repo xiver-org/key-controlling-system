@@ -37,7 +37,7 @@ public class CreateCabinet extends AppCompatActivity {
     }
 
     private void init() {
-        pref = getSharedPreferences("Test2", MODE_PRIVATE);
+        pref = getSharedPreferences("Test4", MODE_PRIVATE);
 
         cabinetNum = findViewById(R.id.editTextNumber);
     }
@@ -48,6 +48,12 @@ public class CreateCabinet extends AppCompatActivity {
 
         String users = pref.getString(save_key, "[]");
         JSONArray jsonArray = new JSONArray(users);
+
+        if (input.length() > 5){
+            Toast.makeText(this, "Длинна кабинета не должна превышать 5 символов", Toast.LENGTH_SHORT)
+                    .show();
+            return;
+        }
 
         boolean fl = false;
         for (int i = 0; i < jsonArray.length(); i++) {

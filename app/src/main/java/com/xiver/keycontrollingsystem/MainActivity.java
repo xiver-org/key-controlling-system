@@ -1,17 +1,11 @@
 package com.xiver.keycontrollingsystem;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -24,16 +18,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private SharedPreferences pref;
     private final String save_key = "cabinets";
     private final String save_key3 = "keys_history";
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -60,7 +51,22 @@ public class MainActivity extends AppCompatActivity {
             throw new RuntimeException(e);
         }
 
-        for (int i = 0; i < jsonKeysHistory.length(); i++) {
+        TableRow fstRow = new TableRow(this);
+        fstRow.setLayoutParams(new TableRow.LayoutParams(
+                TableRow.LayoutParams.MATCH_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT));
+
+        String[] fst_parts = "Имя.кабинет.Время выдачи.Время возврата".split("\\.");
+        for (int j = 0; j < 4; j++) {
+            TextView a = new TextView(this);
+            a.setTextSize(20);
+
+            a.setText(fst_parts[j] + "\t\t\t");
+            fstRow.addView(a);
+        }
+        table_layout.addView(fstRow);
+
+        for (int i = jsonKeysHistory.length() - 1; i >= 0; i--) {
             try {
                 String[] parts = jsonKeysHistory.getString(i).split("\\|");
 
@@ -72,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     TextView a = new TextView(this);
                     a.setTextSize(20);
 
-                    a.setText(parts[j] + "\t\t\t\t\t\t\t\t\t\t");
+                    a.setText(parts[j] + "\t\t\t");
                     row.addView(a);
                 }
                 table_layout.addView(row);
@@ -83,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        pref = getSharedPreferences("Test2", MODE_PRIVATE);
+        pref = getSharedPreferences("Test4", MODE_PRIVATE);
     }
 
 //    @Override
@@ -120,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
     public void addPeupleBtnOnClick(View v) {
-        Intent intent = new Intent(this, CreatePeuple.class);
+        Intent intent = new Intent(this, CreatePeople.class);
         startActivity(intent);
     }
 
