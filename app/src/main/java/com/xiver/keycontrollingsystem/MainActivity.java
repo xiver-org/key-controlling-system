@@ -15,7 +15,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
-import android.speech.AlternativeSpan;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -26,7 +25,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -41,12 +39,10 @@ import org.json.JSONException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     private SharedPreferences pref;
-    private final String save_key = "cabinets";
     private final String save_key3 = "keys_history";
     private ActivityResultLauncher<Intent> activityResultLauncher;
 
@@ -69,14 +65,6 @@ public class MainActivity extends AppCompatActivity {
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult o) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    if (Environment.isExternalStorageManager())
-                        Toast.makeText(MainActivity.this, "We have permission", Toast.LENGTH_SHORT).show();
-                    else
-                        Toast.makeText(MainActivity.this, "You denied the perm", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(MainActivity.this, "You denied the perm", Toast.LENGTH_SHORT).show();
-                }
             }
         });
 
