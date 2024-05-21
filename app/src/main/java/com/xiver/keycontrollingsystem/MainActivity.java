@@ -40,6 +40,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     private SharedPreferences pref;
@@ -106,7 +107,14 @@ public class MainActivity extends AppCompatActivity {
                     TextView a = new TextView(this);
                     a.setTextSize(20);
 
-                    a.setText(parts[j] + "\t\t\t");
+                    if (parts[j].length() > 20){
+                        char[] dst = new char[20];
+                        String str = parts[j];
+                        str.getChars(0, 20, dst, 0);
+                        a.setText(String.copyValueOf(dst) + "..." + "\t\t\t");
+                    } else {
+                        a.setText(parts[j] + "\t\t\t");
+                    }
                     row.addView(a);
                 }
                 table_layout.addView(row);

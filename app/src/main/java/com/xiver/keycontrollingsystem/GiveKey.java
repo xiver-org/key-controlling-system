@@ -91,14 +91,19 @@ public class GiveKey extends AppCompatActivity {
         }
 
         List<String> list2 = new ArrayList<String>();
-        if (jsonCabinets != null) {
-            int len = jsonCabinets.length();
-            for (int i=0;i < len;i++){
-                try {
+        int len = jsonCabinets.length();
+        for (int i=0;i < len;i++){
+            try {
+                if (jsonCabinets.get(i).toString().length() > 30){
+                    char[] dst = new char[30];
+                    String str = jsonCabinets.get(i).toString();
+                    str.getChars(0, 30, dst, 0);
+                    list2.add(String.copyValueOf(dst) + "...");
+                } else {
                     list2.add(jsonCabinets.get(i).toString());
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
                 }
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
             }
         }
 
