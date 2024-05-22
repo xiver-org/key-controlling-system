@@ -107,11 +107,16 @@ public class MainActivity extends AppCompatActivity {
                     TextView a = new TextView(this);
                     a.setTextSize(20);
 
-                    if (parts[j].length() > 20){
-                        char[] dst = new char[20];
+                    if (j == 0 && parts[j].length() > 15){
+                        char[] dst = new char[15];
                         String str = parts[j];
-                        str.getChars(0, 20, dst, 0);
+                        str.getChars(0, 15, dst, 0);
                         a.setText(String.copyValueOf(dst) + "..." + "\t\t\t");
+                    } else if (j == 1 && parts[j].length() > 5){
+                        char[] dst = new char[3];
+                        String str = parts[j];
+                        str.getChars(0, 3, dst, 0);
+                        a.setText(String.copyValueOf(dst) + ".." + "\t\t\t");
                     } else {
                         a.setText(parts[j] + "\t\t\t");
                     }

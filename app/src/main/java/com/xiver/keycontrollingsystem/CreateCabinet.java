@@ -52,11 +52,11 @@ public class CreateCabinet extends AppCompatActivity {
         String users = pref.getString(save_key, "[]");
         JSONArray jsonArray = new JSONArray(users);
 
-        if (input.length() > 5){
-            Toast.makeText(this, "Длинна кабинета не должна превышать 5 символов", Toast.LENGTH_SHORT)
-                    .show();
-            return;
-        }
+//        if (input.length() > 5){
+//            Toast.makeText(this, "Длинна кабинета не должна превышать 5 символов", Toast.LENGTH_SHORT)
+//                    .show();
+//            return;
+//        }
 
         if (input.isEmpty()){
             Toast.makeText(this, "Поле не должно быть пустым!", Toast.LENGTH_SHORT)
