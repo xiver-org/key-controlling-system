@@ -44,7 +44,6 @@ public class CreatePeople extends AppCompatActivity {
         fio = findViewById(R.id.editTextText);
     }
 
-
     public void onPeopleCreate(View v) throws JSONException {
         String input = fio.getText().toString();
 
