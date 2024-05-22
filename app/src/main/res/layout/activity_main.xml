@@ -50,6 +50,7 @@
         tools:layout_editor_absoluteY="5dp" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="686dp"
         android:layout_height="264dp"
         android:layout_weight="1"
@@ -78,5 +79,28 @@
         android:text="@string/export_to_csv"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:onClick="removePeopleBtnOnClick"
+        android:text="@string/remove_people"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/button12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:onClick="removeKeyBtnOnClick"
+        android:text="@string/remove_cabinet"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button11" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

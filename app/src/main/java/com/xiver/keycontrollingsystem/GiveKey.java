@@ -80,7 +80,7 @@ public class GiveKey extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter);
-        spinner1.setPrompt("Выберите человека");
+        spinner1.setPrompt("Выберите кабинет");
 
         String cabinets = pref.getString(save_key, "[]");
         JSONArray jsonCabinets;

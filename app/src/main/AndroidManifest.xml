@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="29" />
+
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
     <application
@@ -14,6 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KeyControllingSystem"
         tools:targetApi="31">
+        <activity
+            android:name=".RemoveCabinet"
+            android:exported="false" />
+        <activity
+            android:name=".RemovePeople"
+            android:exported="false" />
         <activity
             android:name=".CreateCabinet"
             android:exported="false" />

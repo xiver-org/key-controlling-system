@@ -13,4 +13,7 @@
     <string name="return_key_btn_text">Вернуть ключ</string>
     <string name="return_key_text">Выберите ключ для возврата</string>
     <string name="export_to_csv">Экспортировать в CSV</string>
+    <string name="remove_from_base">Удалить из базы</string>
+    <string name="remove_people">Удалить человека</string>
+    <string name="remove_cabinet">Удалить кабинет</string>
 </resources>

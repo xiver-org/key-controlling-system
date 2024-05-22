@@ -193,6 +193,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void removeKeyBtnOnClick(View v) {
+        Intent intent = new Intent(this, RemoveCabinet.class);
+        startActivity(intent);
+    }
+
+    public void removePeopleBtnOnClick(View v) {
+        Intent intent = new Intent(this, RemovePeople.class);
+        startActivity(intent);
+    }
+
 
 
 
